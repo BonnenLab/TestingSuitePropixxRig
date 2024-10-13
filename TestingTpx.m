@@ -39,29 +39,24 @@ frameRate = 120; %Screen('NominalFrameRate',windowPtr);
 KbName('UnifyKeyNames');
 
 vbl = Screen('Flip',windowPtr);
-tmp = nan(1000,1);
+timing = nan(1000,1);
+tic;
+
 for ii=1:1000
-    % tic;
-    [pressed dum keycode] = KbCheck;
-    if pressed
-        if keycode(KbName('escape'))
-            break;
-        end
-    end
 
     Screen('SelectStereoDrawBuffer', windowPtr, 0);
     Screen('DrawDots', windowPtr, [500;500],30,255,[],2);
 
-
     Screen('SelectStereoDrawBuffer', windowPtr, 1);
     Screen('DrawDots', windowPtr, [500;500],30,255,[],2);
 
-    tic;
+
     Datapixx('RegWrRd');
+    tic;
     [xScreenRightCartesian, yScreenRightCartesian, xScreenLeftCartesian, ...
         yScreenLeftCartesian, xRawRight, yRawRight, xRawLeft, yRawLeft] = ...
         Datapixx('GetEyePosition');
-    tmp(ii) = toc;
+    timing(ii) = toc;
     Screen('Flip', windowPtr, vbl +.5*1/frameRate);
 
 end
@@ -69,6 +64,11 @@ end
 Screen('closeall')
 Datapixx('SetPropixxDlpSequenceProgram', 0);
 Datapixx('Close');
+
+%%
+figure;
+
+histogram(timing)
 
 
 
