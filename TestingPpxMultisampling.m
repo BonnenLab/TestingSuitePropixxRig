@@ -19,11 +19,12 @@ for mm=1:length(multisample)
     PsychImaging('PrepareConfiguration');
 
 
+
     % Tell PTB we want to display on a DataPixx device:
     PsychImaging('AddTask', 'General', 'UseDataPixx');
-% PsychImaging('AddTask', 'General', 'FloatingPoint32BitIfPossible');
-% PsychImaging('AddTask', 'General', 'EnableNative10BitFramebuffer' ,1);
-% PsychImaging('AddTask', 'General', 'NormalizedHighresColorRange', 1);
+    % PsychImaging('AddTask', 'General', 'FloatingPoint32BitIfPossible');
+    % PsychImaging('AddTask', 'General', 'EnableNative10BitFramebuffer' ,1);
+    % PsychImaging('AddTask', 'General', 'NormalizedHighresColorRange', 1);
 
     % Enable PROPixx RB3D Sequencer
     Datapixx('SetPropixxDlpSequenceProgram', 1); % the 1 is for the RB3D mode
